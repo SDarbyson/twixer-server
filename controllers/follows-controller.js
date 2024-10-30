@@ -3,13 +3,12 @@ const { Follow, User } = require("../models");
 module.exports = {
 
     getFollowers: async(req, res) => {
-        const { followeeId } = req.params;
-        console.log("Received id:", followeeId); // Debugging line
+        const userId = req.body.followeeId;
 
         try{
             const listOfFollowers = await Follow.findAll({
                 where: {
-                    followee_id: followeeId 
+                    followee_id: userId 
                 },
                 include: [
                     {
@@ -19,30 +18,7 @@ module.exports = {
                     }
                 ]
             });
-            res.status(200).json(listOfFollowers || []);
-        } catch (error){
-            console.error(error);
-            res.status(500).json({message:" Internal server error"});
-        }
-    },
-    getFollowing: async(req, res) => {
-        const { followerId } = req.params;
-        console.log("Received id:", followerId); // Debugging line
-
-        try{
-            const listOfFollowing = await Follow.findAll({
-                where: {
-                    follower_id: followerId 
-                },
-                include: [
-                    {
-                        model: User, 
-                        as: 'followee', 
-                        attributes: [ 'username']
-                    }
-                ]
-            });
-            res.status(200).json(listOfFollowing || []);
+            res.status(200).json(listOfFollowers);
         } catch (error){
             console.error(error);
             res.status(500).json({message:" Internal server error"});
