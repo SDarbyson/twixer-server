@@ -6,7 +6,7 @@ const cors = require('cors');
 
 // app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 // app.use(cors({ origin: 'https://twixer-client-7fc12e0d4cd5.herokuapp.com', credentials: true }));
-app.use(cors({ origin: 'twixer-client.railway.internal', credentials: true}));
+// app.use(cors({ origin: 'twixer-client.railway.internal', credentials: true}));
 app.use(cors({ origin: 'https://twixer-client-production.up.railway.app/', credentials: true}));
 
 app.use(express.json());
